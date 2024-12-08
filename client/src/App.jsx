@@ -11,6 +11,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import { useQuery } from '@tanstack/react-query'
 import { baseUrl } from './constant/url'
 import LoadingSpinner from './components/common/LoadingSpinner'
+import Downbar from './components/common/Downbar'
 const App = () => {
   const {data : authUser ,isLoading} = useQuery({
     queryKey : ["authUser"],
@@ -50,6 +51,7 @@ const App = () => {
   }
   
   return (
+    <>
     <div className='flex max-w-6xl mx-auto'>
       {authUser && <Sidebar/>}
      <Routes >
@@ -60,9 +62,10 @@ const App = () => {
       <Route path='/signup' element={!authUser ? <SignUpPage/> :<Navigate to={"/"}/>}/>
      </Routes>
      {authUser && <RightPanel/>}
-     
-     <Toaster/>
     </div>
+    {authUser && <Downbar/>}
+    <Toaster/>
+    </>
   )
 }
 

@@ -127,14 +127,14 @@ const ProfilePage = () => {
 		}
 
 	})
-
-	const {data:postL} = useQuery({queryKey : ["post"]})
+	const {data:postLen} = useQuery({queryKey : ["post"]})
 	const isMyProfile = authUser._id === user?._id;
 	const date = profileDate(user?.createdAt)
 	const { follow, isPending } = useFollow()
 	const amIfollow = authUser?.following.includes(user?._id)
 	useEffect(() => {
 		refetch()
+		navigate(`/profile/${user?.username}`)
 	}, [username, refetch, amIfollow, isUpdateBio, updateBio])
 
 	const handleImgChange = (e, state) => {
@@ -163,7 +163,7 @@ const ProfilePage = () => {
 								</Link>
 								<div className='flex flex-col'>
 									<p className='font-bold text-lg'>{user?.fullName}</p>
-									<span className='text-sm text-slate-500'>{postL.length} Post</span>
+									<span className='text-sm text-slate-500'>{postLen?.length} Post</span>
 								</div>
 							</div>
 							{/* COVER IMG */}
