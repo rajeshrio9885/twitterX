@@ -20,7 +20,10 @@ const connectDB = require("./DB/connectDB")
 const cookieParser = require('cookie-parser')
 const postRoutes = require("./routes/postRoutes")
 const notificationRoutes = require("./routes/notificationRoutes")
-app.use(cors())
+app.use(cors({
+    origin : "http://localhost:5174",
+    credentials : true
+}))
 app.use(express.urlencoded({
     extended : true
 }))
